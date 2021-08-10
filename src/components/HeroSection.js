@@ -9,17 +9,23 @@ class HeroSection extends React.Component {
         const container = document.getElementById('container');
         container.scrollIntoView({behavior: 'smooth', block: "center"})
     }
-
+    handleScrollMobile() {
+        const container = document.getElementsByClassName('container-mobile')[0];
+        container.scrollIntoView({behavior: 'smooth', block: "center"})
+    }
     render() {
 
         return (
             <div className='hero-container'>
-                <video src='/videos/video-1.mp4' autoPlay loop muted/>
+                <video src='/videos/bookvideo.mp4' autoPlay loop muted/>
                 <h1>UMA NOVA PÁGINA PARA O SEU NEGÓCIO</h1>
-                <p className='text-align '>Gerencie sua biblioteca como nunca antes</p>
+                <p>Gerencie sua biblioteca como nunca antes</p>
                 <div className='hero-btns'>
-                    <button className="ghost margins btn-mobile width" id="signUp"
+                    <button className="ghost margins btn-desktop width" id="signUp"
                             onClick={() => this.handleScroll()}>Comece agora
+                    </button>
+                    <button className="ghost margins btn-mobile btn-mobile-only width" id="signUpMobile"
+                            onClick={() => this.handleScrollMobile()}>Comece agora
                     </button>
                     <Link to='/services'>
                         <button className="ghost margins btn-mobile width" id="signUp"

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
+.admin-container{
+    width: 80%;
+    margin-top: 100px;
+    min-height: 480px;
+    position: relative;
+    margin-bottom: 100px;
+
+}
+.admin-form{
+    min-height: 480px;
+}

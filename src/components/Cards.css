@@ -49,6 +49,7 @@ h1 {
   width: 100%;
   padding-top: 67%;
   overflow: hidden;
+
 }
 
 .fade-img {
@@ -66,7 +67,7 @@ h1 {
   font-size: 12px;
   font-weight: 700;
   color: #fff;
-  background-color: #b52bff;
+  background-color: #3890b3;
   box-sizing: border-box;
 }
 
@@ -87,6 +88,7 @@ h1 {
 
 .cards__item__img:hover {
   transform: scale(1.1);
+
 }
 
 .cards__item__info {

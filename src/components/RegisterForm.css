@@ -25,7 +25,7 @@ h2 {
 }
 
 p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 100;
     line-height: 20px;
     letter-spacing: 0.5px;
@@ -38,17 +38,17 @@ span {
 
 a {
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
     text-decoration: none;
     margin: 15px 0;
 }
 
 button {
     border-radius: 20px;
-    border: 1px solid #b52bff;
-    background-color: #b52bff;
+    border: 1px solid #3890b3;
+    background-color: #3890b3;
     color: #FFFFFF;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     padding: 12px 45px;
     letter-spacing: 1px;
@@ -104,6 +104,20 @@ input {
     min-height: 480px;
 }
 
+.container-mobile {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+    max-width: 100%;
+    min-height: 480px;
+    display: none;
+
+}
+
 .form-container {
     position: absolute;
     top: 0;
@@ -114,6 +128,11 @@ input {
 .sign-in-container {
     left: 0;
     width: 50%;
+    z-index: 2;
+}
+.sign-in-container-mobile{
+    left: 0;
+    width: 100%;
     z-index: 2;
 }
 
@@ -128,6 +147,10 @@ input {
     z-index: 1;
 }
 
+.sign-up-container-mobile{
+    position: absolute;
+    width: 100%;
+}
 .container.right-panel-active .sign-up-container {
     transform: translateX(100%);
     opacity: 1;
@@ -163,9 +186,9 @@ input {
 }
 
 .overlay {
-    background: #4161ff;
-    background: -webkit-linear-gradient(to right, #b52bff, #4161ff);
-    background: linear-gradient(to right, #b52bff, #4161ff);
+    background: #041524;
+    background: -webkit-linear-gradient(to right, #3890b3, #041524);
+    background: linear-gradient(to right, #3890b3, #041524);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -232,7 +255,7 @@ input {
 footer {
     background-color: #222;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     bottom: 0;
     position: fixed;
     left: 0;
@@ -252,4 +275,51 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+.fade-in {
+    /*opacity: 1;*/
+    /*animation-name: fadeInOpacity;*/
+    /*animation-iteration-count: 1;*/
+    /*animation-timing-function: ease-in;*/
+    /*animation-duration: 2s;*/
+    visibility: visible;
+}
+
+.fade-out {
+    /*opacity: 1;*/
+    /*animation-name: fadeOutOpacity;*/
+    /*animation-iteration-count: 1;*/
+    /*animation-timing-function: ease-in;*/
+    /*animation-duration: 2s;*/
+    /*display: none;*/
+    visibility: hidden;
+}
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutOpacity {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container-mobile{
+        display: flex;
+        width: 80%;
+    }
+    .container{
+        display: none;
+    }
 }
