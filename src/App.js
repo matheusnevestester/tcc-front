@@ -7,6 +7,7 @@ import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 import Admin from "./components/pages/Admin";
+import GroupCall from "./components/pages/VideoCallPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/products' component={Products} />
           <Route path='/sign-up' component={SignUp} />
           <Route path='/admin' component={Admin} />
+          <Route path='/group-call' component={GroupCall} />
         </Switch>
       </Router>
     </>

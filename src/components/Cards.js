@@ -10,36 +10,30 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-9.jpg'
-              text='Explore the hidden waterfall deep inside the Amazon Jungle'
-              label='Adventure'
+              src='images/how-to-rent-a-book.jpg'
+              text='Alugue e reserve livros online'
+              label='Alguel de livros online'
               path='/services'
             />
             <CardItem
-              src='images/img-2.jpg'
-              text='Travel through the Islands of Bali in a Private Cruise'
-              label='Luxury'
+              src='images/book-club.jpg'
+              text='Partilhe suas percepções de livros com outras pessoas'
+              label='Clubes do livro'
               path='/services'
             />
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-3.jpg'
-              text='Set Sail in the Atlantic Ocean visiting Uncharted Waters'
-              label='Mystery'
+              src='images/Palestra-online.jpg'
+              text='Assista palestras e aulas online facilmente pela nossa plataforma'
+              label='Palestras online'
               path='/services'
             />
             <CardItem
-              src='images/img-4.jpg'
-              text='Experience Football on Top of the Himilayan Mountains'
-              label='Adventure'
+              src='images/book-nomination.jpg'
+              text='Indicação de livros baseada em livros que você já escolheu antes'
+              label='Indicação de livros'
               path='/products'
-            />
-            <CardItem
-              src='images/img-8.jpg'
-              text='Ride through the Sahara Desert on a guided camel tour'
-              label='Adrenaline'
-              path='/sign-up'
             />
           </ul>
         </div>

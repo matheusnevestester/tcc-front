@@ -7,8 +7,14 @@ const axios = require('axios');
 const initialState = {
     username: '',
     password: '',
+    signUpEmail:'',
+    signUpPass:'',
+    signUpName:'',
+    signUpSurname:'',
+    signUpPhone:'',
     error: false,
     sendLogin: false,
+    sendSignUp: false,
     token: null,
 }
 
@@ -21,9 +27,21 @@ const SignUpForm = () => {
         setState({...state, sendLogin: true})
         console.log('clicou sign in')
     }
+
+    const handleSignUpBtn = (event) => {
+        event.preventDefault();
+        setState({...state, sendSignUp: true})
+        console.log('clicou sign up')
+    }
+// login onchange
     const handleChangeUsername = ({target}) => setState({...state, username: target.value})
     const handleChangePassword = ({target}) => setState({...state, password: target.value})
-
+// signup onchange
+    const handleSignUpEmail = ({target}) => setState({...state, signUpEmail: target.value})
+    const handleSignUpPass = ({target}) => setState({...state, signUpPass: target.value})
+    const handleSignUpName = ({target}) => setState({...state, signUpName: target.value})
+    const handleSignUpSurname = ({target}) => setState({...state, signUpSurname: target.value})
+    const handleSignUpPhone = ({target}) => setState({...state, signUpPhone: target.value})
 
     useEffect(() => {
         if (!state.sendLogin) return
@@ -38,9 +56,7 @@ const SignUpForm = () => {
                     email: state.username,
                     password: state.password
                 }, config)
-                setState({...state, token: response.token, sendLogin: false})
-                console.log(state.token)
-                document.cookie = 'token='+ response.token
+                document.cookie = 'token='+ response.data.token
             } catch (e) {
                 setState({...state, error: true})
                 setTimeout(() =>
@@ -50,6 +66,36 @@ const SignUpForm = () => {
         }
         signInClick()
     }, [state.sendLogin])
+
+
+    useEffect(() => {
+        if (!state.sendSignUp) return
+        const signInClick = async () => {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }
+            try {
+                const response = await axios.post('http://localhost:8082/api/v1/signin/', {
+                    email: state.signUpEmail,
+                    password: state.signUpPass,
+                    firstName:state.signUpName,
+                    lastName:state.signUpSurname,
+                    phone:state.signUpPhone
+                }, config)
+                setState({...state, sendSignUp: false})
+                console.log(response)
+            } catch (e) {
+                setState({...state, error: true})
+                setTimeout(() =>
+                        setState({...state, error: false, sendSignUp: false}),
+                    2000)
+            }
+        }
+        signInClick()
+    }, [state.sendSignUp])
+
 
     console.log(state)
 
@@ -120,9 +166,12 @@ const SignUpForm = () => {
                     <form>
                         <h1>Cadastre-se</h1>
                         <span>use suas informações pessoais para realizar o cadastro</span>
-                        <input type="email" placeholder="Email"/>
-                        <input type="password" placeholder="Senha" />
-                        <button>Me cadastrar!</button>
+                        <input type="email" placeholder="Email"  onChange={handleSignUpEmail}/>
+                        <input type="password" placeholder="Senha"  onChange={handleSignUpPass}/>
+                        <input type="firstName" placeholder="Nome"  onChange={handleSignUpName}/>
+                        <input type="surname" placeholder="Sobrenome"  onChange={handleSignUpSurname}/>
+                        <input type="phone" placeholder="Telefone ou celular"  onChange={handleSignUpPhone}/>
+                        <button onClick={handleSignUpBtn}>Me cadastrar!</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">

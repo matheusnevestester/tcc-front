@@ -46,6 +46,10 @@ const NewBookForm = () => {
                     <h1>Cadastrar novo livro!</h1>
                     <input onChange={handleChangeName} type="name" placeholder="Nome"/>
                     <input type="type" placeholder="Tipo"/>
+                    <input onChange={handleChangeName} type="name" placeholder="Número de registro"/>
+                    <select className= "select" name="categories" >
+                        <option value="1">Categoria 1</option>
+                    </select>
                     <button onClick={handleClickButton}>Cadastrar</button>
                 </form>
             </div>

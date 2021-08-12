@@ -8,7 +8,7 @@ class JitsiComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            room: 'new-room-test',
+            room: 'new-room-test-132324',
             user: {
                 name: 'Matheus N'
             },
@@ -112,9 +112,7 @@ class JitsiComponent extends Component {
         const { isAudioMuted, isVideoMuted } = this.state;
         return (
             <>
-                <header className="nav-bar">
-                    <p className="item-left heading">Jitsi React</p>
-                </header>
+
                 <div id="jitsi-iframe"></div>
                 <div class="item-center">
                     <span>Custom Controls</span>
@@ -126,7 +124,6 @@ class JitsiComponent extends Component {
                     <i onClick={ () => this.executeCommand('toggleVideo') } className={`fas fa-2x grey-color ${isVideoMuted ? 'fa-video-slash' : 'fa-video'}`} aria-hidden="true" title="Start / Stop camera"></i>
                     <i onClick={ () => this.executeCommand('toggleShareScreen') } className="fas fa-film fa-2x grey-color" aria-hidden="true" title="Share your screen"></i>
                 </div>
-
             </>
         );
     }

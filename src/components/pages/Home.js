@@ -13,8 +13,6 @@ function Home() {
             <div className=' patternPadding shadow'>
                 <SignUpForm/>
             </div>
-            {/*<JitsiComponent/>*/}
-
             <Footer/>
         </>
     );

@@ -37,7 +37,7 @@
 .sign-up {
   margin-top: 20px;
   display: flex;
-  background-image: url('/images/img-8.jpg');
+  background-image: url('/images/bookImage.jpeg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -48,10 +48,14 @@
   width: 50%;
 }
 
-.patternPadding{
-  padding-bottom: 100px;
+.patternMargin{
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 
+.patternPadding{
+padding-bottom: 100px;
+}
 .shadow {
   width: 100%;
   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);

@@ -7,7 +7,7 @@ export default function SignUp() {
     return (
         <>
             <div className='sign-up'>
-                <div className='center patternPadding'>
+                <div className='center patternMargin'>
                     <SignUpForm/>
                 </div>
             </div>
