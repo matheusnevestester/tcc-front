@@ -7,12 +7,15 @@ const axios = require('axios');
 const initialState = {
     username: '',
     password: '',
-    signUpEmail:'',
-    signUpPass:'',
-    signUpName:'',
-    signUpSurname:'',
-    signUpPhone:'',
-    error: false,
+    signUpEmail: '',
+    signUpPass: '',
+    signUpName: '',
+    signUpSurname: '',
+    signUpPhone: '',
+    errorLogin: false,
+    errorSignUp: false,
+    loginSuccess: false,
+    signUpSuccess: false,
     sendLogin: false,
     sendSignUp: false,
     token: null,
@@ -43,6 +46,7 @@ const SignUpForm = () => {
     const handleSignUpSurname = ({target}) => setState({...state, signUpSurname: target.value})
     const handleSignUpPhone = ({target}) => setState({...state, signUpPhone: target.value})
 
+    // effect signin
     useEffect(() => {
         if (!state.sendLogin) return
         const signInClick = async () => {
@@ -56,17 +60,20 @@ const SignUpForm = () => {
                     email: state.username,
                     password: state.password
                 }, config)
-                document.cookie = 'token='+ response.data.token
+                console.log(response)
+                document.cookie = 'token=' + response.data.token
+                setState({...state, loginSuccess: true, sendLogin: false})
             } catch (e) {
-                setState({...state, error: true})
+                setState({...state, errorLogin: true})
                 setTimeout(() =>
-                    setState({...state, error: false, sendLogin: false}),
+                        setState({...state, errorLogin: false, sendLogin: false}),
                     2000)
             }
         }
         signInClick()
     }, [state.sendLogin])
 
+    // effect signup
 
     useEffect(() => {
         if (!state.sendSignUp) return
@@ -80,16 +87,16 @@ const SignUpForm = () => {
                 const response = await axios.post('http://localhost:8082/api/v1/signin/', {
                     email: state.signUpEmail,
                     password: state.signUpPass,
-                    firstName:state.signUpName,
-                    lastName:state.signUpSurname,
-                    phone:state.signUpPhone
+                    firstName: state.signUpName,
+                    lastName: state.signUpSurname,
+                    phone: state.signUpPhone
                 }, config)
-                setState({...state, sendSignUp: false})
+                setState({...state, signUpSuccess: true, sendSignUp: false})
                 console.log(response)
             } catch (e) {
-                setState({...state, error: true})
+                setState({...state, errorSignUp: true})
                 setTimeout(() =>
-                        setState({...state, error: false, sendSignUp: false}),
+                        setState({...state, errorSignUp: false, sendSignUp: false}),
                     2000)
             }
         }
@@ -97,11 +104,8 @@ const SignUpForm = () => {
     }, [state.sendSignUp])
 
 
-    console.log(state)
-
-
     /*
-    front effects
+    front handling
     */
 
     const handleSignUpClick = () => {
@@ -124,7 +128,7 @@ const SignUpForm = () => {
         container.classList.remove("fade-out")
     }
 
-    const handleCloseAlert = () =>{
+    const handleCloseAlert = () => {
         console.log("fazer")
     }
 
@@ -136,10 +140,12 @@ const SignUpForm = () => {
                         time faça seu login aqui!</a>
                     <form>
                         <h1>Cadastre-se</h1>
-                        <span>use suas informações pessoais para realizar o cadastro</span>
-                        <input type="text" placeholder="Nome"/>
-                        <input type="email" placeholder="Email"/>
-                        <input type="password" placeholder="Senha"/>
+                        <span>Use suas informações pessoais para realizar o cadastro</span>
+                        <input type="email" placeholder="Email" onChange={handleSignUpEmail}/>
+                        <input type="password" placeholder="Senha" onChange={handleSignUpPass}/>
+                        <input type="firstName" placeholder="Nome" onChange={handleSignUpName}/>
+                        <input type="surname" placeholder="Sobrenome" onChange={handleSignUpSurname}/>
+                        <input type="phone" placeholder="Telefone ou celular" onChange={handleSignUpPhone}/>
                         <button>Me cadastrar!</button>
                     </form>
                 </div>
@@ -147,12 +153,8 @@ const SignUpForm = () => {
                     <a className='clickableLink' onClick={handleSignInClickMobile}>Não tem conta?
                         Cadastre-se aqui</a>
                     <form>
-                        {state.alertError && <div className="alert">
-                            <span className="closebtn" onClick={handleCloseAlert}>&times;</span>
-                            This is an alert box.
-                        </div>}
                         <h1>Faça o login aqui!</h1>
-                        <input type="email" placeholder="Email"  onChange={handleChangeUsername}/>
+                        <input type="email" placeholder="Email" onChange={handleChangeUsername}/>
                         <input type="password" placeholder="Senha" onChange={handleChangePassword}/>
                         <a href="#">Esqueceu sua senha? Clique aqui!</a>
                         <button>Entrar!</button>
@@ -164,24 +166,36 @@ const SignUpForm = () => {
             <div className="container center container-default-class" id="container">
                 <div className="form-container sign-up-container">
                     <form>
+                        {state.signUpSuccess && <div className="alert-succes">
+                            <span className="alert-closebtn">&times;</span>
+                            Cadastro realizado com sucesso
+                        </div>}
+                        {state.errorSignUp && <div className="alert">
+                            <span className="alert-closebtn">&times;</span>
+                            Oops parece que algo deu errado
+                        </div>}
                         <h1>Cadastre-se</h1>
-                        <span>use suas informações pessoais para realizar o cadastro</span>
-                        <input type="email" placeholder="Email"  onChange={handleSignUpEmail}/>
-                        <input type="password" placeholder="Senha"  onChange={handleSignUpPass}/>
-                        <input type="firstName" placeholder="Nome"  onChange={handleSignUpName}/>
-                        <input type="surname" placeholder="Sobrenome"  onChange={handleSignUpSurname}/>
-                        <input type="phone" placeholder="Telefone ou celular"  onChange={handleSignUpPhone}/>
+                        <span>Use suas informações pessoais para realizar o cadastro</span>
+                        <input type="email" placeholder="Email" onChange={handleSignUpEmail}/>
+                        <input type="password" placeholder="Senha" onChange={handleSignUpPass}/>
+                        <input type="firstName" placeholder="Nome" onChange={handleSignUpName}/>
+                        <input type="surname" placeholder="Sobrenome" onChange={handleSignUpSurname}/>
+                        <input type="phone" placeholder="Telefone ou celular" onChange={handleSignUpPhone}/>
                         <button onClick={handleSignUpBtn}>Me cadastrar!</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
                     <form>
-                        {state.error && <div className="alert">
+                        {state.loginSuccess && <div className="alert-succes">
+                            <span className="alert-closebtn">&times;</span>
+                            Login realizado com sucesso
+                        </div>}
+                        {state.errorLogin && <div className="alert">
                             <span className="alert-closebtn">&times;</span>
                             Oops parece que algo deu errado
                         </div>}
                         <h1>Faça o login aqui!</h1>
-                        <input type="email" placeholder="Email"  onChange={handleChangeUsername}/>
+                        <input type="email" placeholder="Email" onChange={handleChangeUsername}/>
                         <input type="password" placeholder="Senha" onChange={handleChangePassword}/>
                         <a href="#">Esqueceu sua senha? Clique aqui!</a>
                         <button onClick={handleSignInBtn}>Entrar!</button>

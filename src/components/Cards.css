@@ -52,6 +52,13 @@ h1 {
 
 }
 
+.cards__item__pic-wrap_default {
+  position: relative;
+  width: 100%;
+  padding-top: 67%;
+  overflow: hidden;
+
+}
 .fade-img {
   animation-name: fade-img;
   animation-duration: 2s;

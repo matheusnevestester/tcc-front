@@ -1,13 +1,14 @@
 import React from 'react';
 import '../../App.css';
 import Footer from "../Footer";
-import NewBookForm from "../AdminBoard/NewBookForm";
+import BookList from "../BookList";
 
-export default function Admin() {
+export default function BookRenting() {
     return (
         <>
-            <NewBookForm/>
+            <BookList/>
             <Footer/>
         </>
-    );
+
+    )
 }

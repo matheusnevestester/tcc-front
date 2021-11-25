@@ -41,11 +41,21 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  height: 800px;
+}
+.book-club{
+  margin-top: 20px;
+  display: flex;
+  background-image: url('/images/bookImage.jpeg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 800px;
 }
 
 .center {
   margin: auto;
-  width: 50%;
+  width: 100%;
 }
 
 .patternMargin{

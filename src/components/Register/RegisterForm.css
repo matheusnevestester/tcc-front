@@ -101,7 +101,7 @@ input {
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 600px;
 }
 
 .container-mobile {
@@ -113,7 +113,7 @@ input {
     overflow: hidden;
     width: 600px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 550px;
     display: none;
 
 }
@@ -298,6 +298,13 @@ footer a {
 .alert {
     padding: 20px;
     background-color: #f44336;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.alert-succes {
+    padding: 20px;
+    background-color: #52f436;
     color: white;
     margin-bottom: 20px;
 }

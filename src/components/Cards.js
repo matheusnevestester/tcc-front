@@ -13,13 +13,13 @@ function Cards() {
               src='images/how-to-rent-a-book.jpg'
               text='Alugue e reserve livros online'
               label='Alguel de livros online'
-              path='/services'
+              path='/books-list'
             />
             <CardItem
               src='images/book-club.jpg'
               text='Partilhe suas percepções de livros com outras pessoas'
               label='Clubes do livro'
-              path='/services'
+              path='/book-club'
             />
           </ul>
           <ul className='cards__items'>
@@ -27,7 +27,7 @@ function Cards() {
               src='images/Palestra-online.jpg'
               text='Assista palestras e aulas online facilmente pela nossa plataforma'
               label='Palestras online'
-              path='/services'
+              path='/group-call'
             />
             <CardItem
               src='images/book-nomination.jpg'
