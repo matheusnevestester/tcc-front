@@ -27,13 +27,13 @@ function Cards() {
               src='images/Palestra-online.jpg'
               text='Assista palestras e aulas online facilmente pela nossa plataforma'
               label='Palestras online'
-              path='/group-call'
+              path='/conferences'
             />
             <CardItem
               src='images/book-nomination.jpg'
               text='Indicação de livros baseada em livros que você já escolheu antes'
               label='Indicação de livros'
-              path='/products'
+              path='/conferences'
             />
           </ul>
         </div>

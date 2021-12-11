@@ -17,7 +17,6 @@ class HeroSection extends React.Component {
 
         return (
             <div className='hero-container'>
-                <video src='/videos/bookvideo.mp4' autoPlay loop muted/>
                 <h1>UMA NOVA PÁGINA PARA O SEU NEGÓCIO</h1>
                 <p>Gerencie sua biblioteca como nunca antes</p>
                 <div className='hero-btns'>

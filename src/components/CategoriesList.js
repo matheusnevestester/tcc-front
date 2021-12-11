@@ -11,7 +11,7 @@ export default function CategoriesList() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/v1/categories/').then(({data}) => {
+        axios.get('http://localhost:8081/api/v1/categories').then(({data}) => {
             console.log(data)
             setCategories(data.data);
         })

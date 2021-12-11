@@ -1,0 +1,21 @@
+.detailPage{
+    padding: 4rem;
+    background: #fff;
+}
+
+.detailPageImg{
+    width: 100%;
+}
+
+img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: block;
+    margin: auto;
+}
+.detailPageDescription{
+    box-shadow: 0 -2px 3px -3px black, 0 2px 3px -3px black;
+    width: 100%;
+    text-align: center;
+    padding: 20px
+}

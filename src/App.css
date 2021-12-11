@@ -1,81 +1,90 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'PT Sans', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
 }
 
 .home,
 .services,
 .products,
 .sign-up {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  /*font-size: 3rem;*/
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+    /*font-size: 3rem;*/
 }
 
 .services {
-  background-image: url('/images/img-2.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
+    background-image: url('/images/img-2.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 100px;
+}
+
+.background-gif {
+    background-image: url('/videos/ezgif.com-gif-maker.gif');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .products {
-  background-image: url('/images/img-1.jpg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
+    background-image: url('/images/img-1.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 100px;
 }
 
 .sign-up {
-  margin-top: 20px;
-  display: flex;
-  background-image: url('/images/bookImage.jpeg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 800px;
+    margin-top: 20px;
+    display: flex;
+    background-image: url('/images/bookImage.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 800px;
 }
-.book-club{
-  margin-top: 20px;
-  display: flex;
-  background-image: url('/images/bookImage.jpeg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 800px;
+
+.book-club {
+    margin-top: 20px;
+    display: flex;
+    background-image: url('/images/bookImage.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 800px;
 }
 
 .center {
-  margin: auto;
-  width: 100%;
+    margin: auto;
+    width: 100%;
 }
 
-.patternMargin{
-  margin-top: 100px;
-  margin-bottom: 100px;
+.patternMargin {
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
-.patternPadding{
-padding-bottom: 100px;
+.patternPadding {
+    padding-bottom: 100px;
 }
+
 .shadow {
-  width: 100%;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
-  display: block;
+    width: 100%;
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+    display: block;
 }
 
-.clickableLink{
-  color: #3c97bf;
-  position: absolute;
-  right: 0px;
-  padding-right: 10px;
-  padding-left: 20px;
+.clickableLink {
+    color: #3c97bf;
+    position: absolute;
+    right: 0px;
+    padding-right: 10px;
+    padding-left: 20px;
 }

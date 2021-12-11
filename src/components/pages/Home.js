@@ -9,9 +9,11 @@ import JitsiComponent from "../Jitsi";
 function Home() {
     return (
         <>
-            <HeroSection/>
-            <div className='patternPadding shadow'>
-                <SignUpForm/>
+            <div className="background-gif">
+                <HeroSection/>
+                <div className='patternPadding shadow'>
+                    <SignUpForm/>
+                </div>
             </div>
             <Footer/>
         </>

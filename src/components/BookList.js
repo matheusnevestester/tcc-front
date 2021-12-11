@@ -6,68 +6,60 @@ import CategoryItem from "./CategoryItem";
 
 const axios = require('axios');
 
-export default function CategoriesList() {
+export default function BookList() {
 
     const [categories, setCategories] = useState([]);
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/mgr/api/v1/categories',{
-            headers:{
-                'Authorization': 'eyJhbGciOiJIUzI1NiIsImtpZCI6Ik85QTFDQmVEeVR0aTRYS2Npd1B0Mmo3NnJKaEZtTkE1IiwidHlwIjoiSldUIn0.eyJhY2Nlc3NfdXVpZCI6ImI1NDgxMzI4LTEwZDUtNDk5Ny1iOGIzLTBjODk0ZGZkYmQ5MCIsImF1dGhvcml6ZWQiOnRydWUsImVtYWlsIjoibWF0aGV1bkBob3RtYWlsLmNvbSIsImV4cCI6MTYzNzc4ODkyMiwiaXNzIjoiTzlBMUNCZUR5VHRpNFhLY2l3UHQyajc2ckpoRm1OQTUifQ.H_RG85c0XIZ-ngV1draRpenpItOhe5BY-VH2vdoERz4',
-                'Access-Control-Allow-Origin': 'http://localhost:3000'
-            }
-        }).then(({data}) => {
+        axios.get('http://localhost:8081/api/v1/categories'
+        ).then(({data}) => {
             console.log(data)
             setCategories(data.data);
         })
+/*        if (categories.length > 0) {
+            categories.map((category) => (
+                axios.get('http://localhost:8081/api/v1/books/' + category.id + '/category', {}).then(({data}) => {
+                    console.log(data)
+                    setBooks(data.data);
+                })))*/
+
+        /*}*/
         // eslint-disable-next-line
     }, [])
     console.log(categories)
 
-    // useEffect(() => {
-    //     axios.get('http://localhost:8081/api/v1/books/').then(({data}) => {
-    //         console.log(data)
-    //         setBooks(data.data);
-    //     })
-    //     // eslint-disable-next-line
-    // }, [])
-    // console.log(books)
-
-    function getBooks(categoryId){
-        axios.get('http://localhost:8000/mgr/api/v1/books?categoryId='+categoryId+'',{
-            headers:{
-                'Authorization': 'eyJhbGciOiJIUzI1NiIsImtpZCI6Ik85QTFDQmVEeVR0aTRYS2Npd1B0Mmo3NnJKaEZtTkE1IiwidHlwIjoiSldUIn0.eyJhY2Nlc3NfdXVpZCI6ImI1NDgxMzI4LTEwZDUtNDk5Ny1iOGIzLTBjODk0ZGZkYmQ5MCIsImF1dGhvcml6ZWQiOnRydWUsImVtYWlsIjoibWF0aGV1bkBob3RtYWlsLmNvbSIsImV4cCI6MTYzNzc4ODkyMiwiaXNzIjoiTzlBMUNCZUR5VHRpNFhLY2l3UHQyajc2ckpoRm1OQTUifQ.H_RG85c0XIZ-ngV1draRpenpItOhe5BY-VH2vdoERz4',
-                'Access-Control-Allow-Headers': 'test'
-            }
-        } ).then(({data}) => {
+    useEffect(() => {
+        axios.get('http://localhost:8081/api/v1/books').then(({data}) => {
             console.log(data)
             setBooks(data.data);
         })
-        console.log(books)
+        // eslint-disable-next-line
+    }, [])
+    console.log(books)
+
+    function getBooks(categoryId) {
+
     }
 
     return (
         <div className='cards'>
             <h1>Nossos livros disponíveis!</h1>
             <div className='cards__wrapper'>
-                <h1>Categorias</h1>
-                    {categories?.map((category) => (
-                        <ul>
-                            {getBooks(category.id)}
-                            <br></br>
-                            <h2>{category.name}</h2>
-                            <ul className='cards__items'>
-                                {books?.map((book) => (
-                                    <CategoryItem
-                                        src='images/book-tcc.jpg'
-                                        text={book.title}
-                                        path='/books-list'
-                                    />
-                                ))}
-                            </ul>
+                {categories?.map((category) => (
+                    <ul>
+                        <h2>{category.name}</h2>
+                        <ul className='cards__items'>
+                            {books?.map((book) => (
+                                <CategoryItem
+                                    src='images/book-tcc.jpg'
+                                    text={book.title}
+                                    path='/books-list'
+                                />
+                            ))}
                         </ul>
-                    ))}
+                    </ul>
+                ))}
             </div>
         </div>
     );

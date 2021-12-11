@@ -11,6 +11,10 @@ import GroupCall from "./components/pages/VideoCallPage";
 import BookRenting from "./components/pages/BookRenting";
 import BookClub from "./components/pages/BookClub";
 import CategoriesList from "./components/CategoriesList";
+import Categories from "./components/pages/Categories";
+import Conferences from "./components/pages/Conferences";
+import BookDetailPage from "./components/BookDetailPage";
+import BookDetails from "./components/pages/BookDetailPage";
 
 function App() {
   return (
@@ -26,7 +30,11 @@ function App() {
           <Route path='/group-call' component={GroupCall} />
           <Route path='/books-list' component={BookRenting} />
           <Route path='/book-club' component={BookClub} />
-          <Route path='/categories' component={CategoriesList} />
+          <Route path='/categories' component={Categories} />
+          <Route path='/conferences' component={Conferences} />
+          <Route path='/book' component={BookDetails} />
+
+
 
         </Switch>
       </Router>
