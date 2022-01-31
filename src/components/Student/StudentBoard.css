@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
+.boxShadow{
+    box-shadow: 0 -2px 3px -3px black, 0 2px 3px -3px black;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.alignCenter{
+    width: 100%;
+    text-align: center;
+}
+.informationStudent{
+    width: 100%;
+}
+.backPage{
+    padding: 4rem;
+    background: #fff;
+}
+.select{
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.studentImg{
+    max-width: 100px;
+    max-height: 150px;
+}
+
+.inputEdit{
+    width: 80%;
+}

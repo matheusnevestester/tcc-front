@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    box-sizing: border-box;
+}
+
+.commentSession{
+    width: 100%;
+    background: #fff;
+    margin-bottom: 40px;
+
+}
+.commentBlock{
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+.maxWidth{
+    width: 80%;
+}
+
+.commentWidth{
+    width: 75%;
+}
+
+.commentParagraph{
+    padding: 10px;
+    background: #eeeeee;
+
+}

@@ -3,8 +3,10 @@ import '../App.css';
 import {Button} from './Button';
 import './HeroSection.css';
 import {Link} from "react-router-dom";
+import getAuthToken from "../utils/getToken";
 
 class HeroSection extends React.Component {
+
     handleScroll() {
         const container = document.getElementById('container');
         container.scrollIntoView({behavior: 'smooth', block: "center"})

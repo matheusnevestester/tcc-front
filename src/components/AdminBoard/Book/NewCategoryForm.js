@@ -1,11 +1,13 @@
 import React, {useRef, useState, useEffect} from "react";
-import './AdminForms.css'
-import '../Register/RegisterForm.css'
+import '../AdminForms.css'
+import '../../Register/RegisterForm.css'
 const axios = require('axios');
 
 const initialState = {
     categoryName: '',
     categoryDescription: '',
+    newCategorySuccess: false,
+    newCategoryFailure: false,
     error: false,
     sendNewCategory: false,
     articleId: null,
@@ -32,17 +34,17 @@ const NewCategoryForm = () => {
                 }
             }
             try {
-                const response = await axios.post('http://localhost:8081/api/v1/categories/', {
+                const response = await axios.post('http://localhost:8081/api/v1/categories', {
                     name: state.categoryName,
                     description: state.categoryDescription
                 }, config)
                 console.log(response)
-                setState({...state, sendNewCategory: false})
+                setState({...state, sendNewCategory: false, newCategorySuccess: true})
             } catch (e) {
                 console.log(e);
-                setState({...state, error: true})
+                setState({...state, newCategoryFailure: true})
                 setTimeout(() =>
-                        setState({...state, error: false, sendNewCategory: false}),
+                        setState({...state, newCategoryFailure: false, sendNewCategory: false}),
                     2000)
             }
         }
@@ -53,16 +55,24 @@ const NewCategoryForm = () => {
 
     return (
         <>
-            <div className="admin-container center">
-                <form className="admin-form">
-                    <h1>Cadastrar nova categoria!</h1>
-                    <input onChange={handleChangeName} type="Nome" placeholder="Nome"/>
-                    <input  onChange={handleChangeDescription} type="Descrição" placeholder="Autor"/>
-                    <button onClick={handleClickButton}>Cadastrar</button>
-                </form>
-            </div>
-        </>
-    )
+        <div className="admin-container center">
+            <form className="admin-form">
+                {state.newCategorySuccess && <div className="alert-succes">
+                <span className="alert-closebtn">&times;</span>
+                Cadastro realizado com sucesso
+            </div>}
+                {state.newCategoryFailure && <div className="alert">
+                    <span className="alert-closebtn">&times;</span>
+                    Oops parece que algo deu errado
+                </div>}
+                <h1>Cadastrar nova categoria!</h1>
+                <input onChange={handleChangeName} type="name" placeholder="Nome"/>
+                <input  onChange={handleChangeDescription} type="description" placeholder="Descrição"/>
+            <button onClick={handleClickButton}>Cadastrar</button>
+        </form>
+        </div>
+</>
+)
 }
 
 export default NewCategoryForm

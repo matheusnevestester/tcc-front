@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import getAuthToken from "../utils/getToken";
+import axios from "axios";
+
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -17,6 +23,20 @@ function Navbar() {
       setButton(true);
     }
   };
+
+  useEffect(() => {
+    setAuthorized(getAuthToken())
+    if(localStorage.getItem('loggedUser')){
+      axios.get('http://localhost:8082/api/v1/users/'+localStorage.getItem('loggedUser')+''
+      ).then(({data}) => {
+        setIsAdmin(!data.studentAccount)
+        console.log(data)
+      })
+    }
+    //setIsAdmin(getPermission())
+    console.log(isAdmin)
+    console.log(authorized)
+  },[])
 
   useEffect(() => {
     showButton();
@@ -59,18 +79,54 @@ function Navbar() {
             {/*    Products*/}
             {/*  </Link>*/}
             {/*</li>*/}
-
-            <li>
+            {!isAdmin && authorized && <li>
               <Link
-                to='/sign-up'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
+                  to='/services-student'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+              >
+                Área do estudante
+              </Link>
+            </li>}
+            {isAdmin && authorized && <li>
+              <Link
+                  to='/admin'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+              >
+                Painel administrador
+              </Link>
+              <Link
+                  to='/admin'
+                  className='nav-links'
+                  onClick={closeMobileMenu}
+              >
+                Painel administrador
+              </Link>
+            </li>}
+            {!authorized && <li>
+              <Link
+                  to='/sign-up'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
               >
                 Entrar
               </Link>
-            </li>
+            </li>}
+            {authorized && <li>
+              <Link
+                  to='/sign-up'
+                  className='nav-links-mobile'
+                  onClick={closeMobileMenu}
+              >
+                Sair
+              </Link>
+            </li>}
           </ul>
-          {button && <Button buttonStyle='btn--outline'>Entrar</Button>}
+          {!authorized && button && <Button buttonStyle='btn--outline'>Entrar</Button>}
+          {authorized && button &&
+            <Button buttonStyle='btn--outline'>Sair</Button>
+          }
         </div>
       </nav>
     </>

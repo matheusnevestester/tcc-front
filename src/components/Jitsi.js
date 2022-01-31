@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+const test = 'new-room-test-132324'
 class JitsiComponent extends Component {
 
     domain = 'meet.jit.si';
@@ -8,7 +8,7 @@ class JitsiComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            room: 'new-room-test-132324',
+            room: test,
             user: {
                 name: 'Matheus N'
             },

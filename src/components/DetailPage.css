@@ -12,10 +12,30 @@ img {
     padding-bottom: 20px;
     display: block;
     margin: auto;
+    max-height: 80%;
+    width: 200px;
 }
 .detailPageDescription{
     box-shadow: 0 -2px 3px -3px black, 0 2px 3px -3px black;
     width: 100%;
     text-align: center;
     padding: 20px
+}
+.align-text{
+    text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+    .rentButton{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+    .container{
+        display: none;
+    }
+    img{
+        max-width: 80%
+    }
 }

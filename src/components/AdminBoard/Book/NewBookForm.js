@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
-import './AdminForms.css'
-import '../Register/RegisterForm.css'
+import '../AdminForms.css'
+import '../../Register/RegisterForm.css'
 const axios = require('axios');
 
 const initialState = {
@@ -8,14 +8,19 @@ const initialState = {
     bookingAuthor: '',
     bookingNumber: '',
     bookingCategory: '',
+    bookingDescription: '',
+    bookingImage: '',
     error: false,
     sendNewBkg: false,
     articleId: null,
+    newBookSuccess: false,
+    newBookFailure: false
 }
 
 const NewBookForm = () => {
 
     const [state, setState] = useState(initialState);
+    const [categories, setCategories] = useState([]);
 
     const handleClickButton = (event) => {
         event.preventDefault();
@@ -26,18 +31,26 @@ const NewBookForm = () => {
     const handleChangeAuthor = ({target}) => setState({...state, bookingAuthor: target.value})
     const handleChangeRegisterNumber = ({target}) => setState({...state, bookingNumber: target.value})
     const handleChangeCategory = ({target}) => setState({...state, bookingCategory: target.value})
+    const handleChangeDescription = ({target}) => setState({...state, bookingDescription: target.value})
+    const handleChangeImage = ({target}) => setState({...state, bookingImage: target.value})
 
+    useEffect(() => {
+        axios.get('http://localhost:8081/api/v1/categories'
+        ).then(({data}) => {
+            setCategories(data);
+        })
+    }, [])
 
     useEffect(() => {
         if (!state.sendNewBkg) return
-        const signInClick = async () => {
+        const registerBook = async () => {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                 }
             }
             try {
-                const response = await axios.post('http://localhost:8081/api/v1/books/', {
+                const response = await axios.post('http://localhost:8081/api/v1/book', {
                     title: state.bookingName,
                     author: state.bookingAuthor,
                     registerNumber: state.bookingNumber,
@@ -45,16 +58,15 @@ const NewBookForm = () => {
 
                 }, config)
                 console.log(response)
-                document.cookie = 'token=' + response.data.token
-                setState({...state, loginSuccess: true, sendNewBkg: false})
+                setState({...state, newBookSuccess: true, sendNewBkg: false})
             } catch (e) {
-                setState({...state, error: true})
+                setState({...state, newBookFailure: true})
                 setTimeout(() =>
-                        setState({...state, error: false, sendNewBkg: false}),
+                        setState({...state, newBookFailure: false, sendNewBkg: false}),
                     2000)
             }
         }
-        signInClick()
+        registerBook()
     }, [state.sendNewBkg])
 
     console.log(state)
@@ -63,16 +75,29 @@ const NewBookForm = () => {
         <>
             <div className="admin-container center">
                 <form className="admin-form">
+                    {state.newBookSuccess && <div className="alert-succes">
+                        <span className="alert-closebtn">&times;</span>
+                        Cadastro realizado com sucesso
+                    </div>}
+                    {state.newBookFailure && <div className="alert">
+                        <span className="alert-closebtn">&times;</span>
+                        Oops parece que algo deu errado
+                    </div>}
                     <h1>Cadastrar novo livro!</h1>
                     <input onChange={handleChangeName} type="name" placeholder="Nome"/>
                     <input  onChange={handleChangeAuthor} type="author" placeholder="Autor"/>
                     <input onChange={handleChangeRegisterNumber} type="registerNumber" placeholder="Número de registro"/>
                     <select onChange={handleChangeCategory} className= "select" name="categories" >
-                        <option value="1">Categoria 1</option>
-                        <option value="2">Categoria 2</option>
+                        <option value ="empty">----</option>
+                        {categories.map((categoryItem =>(
+                            <option value={categoryItem.id}>{categoryItem.name}</option>
+                        )))}
                     </select>
+                    <input  onChange={handleChangeDescription} type="description" placeholder="Descrição"/>
+                    <input  onChange={handleChangeImage} type="book-image" placeholder="Imagem"/>
                     <button onClick={handleClickButton}>Cadastrar</button>
                 </form>
+
             </div>
         </>
     )

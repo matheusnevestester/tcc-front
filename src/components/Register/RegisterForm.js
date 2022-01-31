@@ -1,10 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import './RegisterForm.css'
-
+import useToken from "../../utils/getToken";
+import getAuthToken from "../../utils/getToken";
 const axios = require('axios');
 
 
 const initialState = {
+    authorized: '',
     username: '',
     password: '',
     signUpEmail: '',
@@ -12,6 +14,7 @@ const initialState = {
     signUpName: '',
     signUpSurname: '',
     signUpPhone: '',
+    signUpRA: '',
     errorLogin: false,
     errorSignUp: false,
     loginSuccess: false,
@@ -21,10 +24,9 @@ const initialState = {
     token: null,
 }
 
-const SignUpForm = () => {
-
+export default function SignUpForm({setToken}){
     const [state, setState] = useState(initialState);
-
+    let authorized = false;
     const handleSignInBtn = (event) => {
         event.preventDefault();
         setState({...state, sendLogin: true})
@@ -39,12 +41,16 @@ const SignUpForm = () => {
 // login onchange
     const handleChangeUsername = ({target}) => setState({...state, username: target.value})
     const handleChangePassword = ({target}) => setState({...state, password: target.value})
-// signup onchange
+
+    const handleChangeRA = ({target}) => setState({...state, signUpRA: target.value})
     const handleSignUpEmail = ({target}) => setState({...state, signUpEmail: target.value})
-    const handleSignUpPass = ({target}) => setState({...state, signUpPass: target.value})
-    const handleSignUpName = ({target}) => setState({...state, signUpName: target.value})
-    const handleSignUpSurname = ({target}) => setState({...state, signUpSurname: target.value})
-    const handleSignUpPhone = ({target}) => setState({...state, signUpPhone: target.value})
+    const handleSignUpRA = ({target}) => setState({...state, signUpPass: target.value})
+
+
+    useEffect(() => {
+        setState({...state, authorized: getAuthToken()})
+        console.log(state.authorized)
+    },[])
 
     // effect signin
     useEffect(() => {
@@ -56,12 +62,14 @@ const SignUpForm = () => {
                 }
             }
             try {
-                const response = await axios.post('http://localhost:8082/api/v1/login/', {
+                const response = await axios.post('http://localhost:8082/api/v1/login', {
                     email: state.username,
                     password: state.password
                 }, config)
                 console.log(response)
                 document.cookie = 'token=' + response.data.token
+                localStorage.setItem("loggedUser","22")
+                window.location.reload(false);
                 setState({...state, loginSuccess: true, sendLogin: false})
             } catch (e) {
                 setState({...state, errorLogin: true})
@@ -84,7 +92,7 @@ const SignUpForm = () => {
                 }
             }
             try {
-                const response = await axios.post('http://localhost:8082/api/v1/signin/', {
+                const response = await axios.post('http://localhost:8082/api/v1/signin', {
                     email: state.signUpEmail,
                     password: state.signUpPass,
                     firstName: state.signUpName,
@@ -132,21 +140,21 @@ const SignUpForm = () => {
         console.log("fazer")
     }
 
+
     return (
+
         <>
+            {!state.authorized &&
             <div className="container-mobile center container-default-class" id="container-mobile">
                 <div className="form-container sign-up-container-mobile center">
                     <a className='clickableLink' onClick={handleSignUpClickMobile}>Se já faz parte do
                         time faça seu login aqui!</a>
                     <form>
                         <h1>Cadastre-se</h1>
-                        <span>Use suas informações pessoais para realizar o cadastro</span>
+                        <span>Use suas informações pessoais para solicitar acesso!</span>
+                        <input type="RA" placeholder="RA" onChange={handleChangeRA}/>
                         <input type="email" placeholder="Email" onChange={handleSignUpEmail}/>
-                        <input type="password" placeholder="Senha" onChange={handleSignUpPass}/>
-                        <input type="firstName" placeholder="Nome" onChange={handleSignUpName}/>
-                        <input type="surname" placeholder="Sobrenome" onChange={handleSignUpSurname}/>
-                        <input type="phone" placeholder="Telefone ou celular" onChange={handleSignUpPhone}/>
-                        <button>Me cadastrar!</button>
+                        <button>Solicitar nova conta!</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container-mobile" id='mobile-sign-in'>
@@ -161,8 +169,9 @@ const SignUpForm = () => {
                     </form>
                 </div>
             </div>
+            }
 
-
+            {!state.authorized &&
             <div className="container center container-default-class" id="container">
                 <div className="form-container sign-up-container">
                     <form>
@@ -175,13 +184,10 @@ const SignUpForm = () => {
                             Oops parece que algo deu errado
                         </div>}
                         <h1>Cadastre-se</h1>
-                        <span>Use suas informações pessoais para realizar o cadastro</span>
+                        <span>Use suas informações pessoais para solicitar acesso!</span>
+                        <input type="RA" placeholder="RA" onChange={handleChangeRA}/>
                         <input type="email" placeholder="Email" onChange={handleSignUpEmail}/>
-                        <input type="password" placeholder="Senha" onChange={handleSignUpPass}/>
-                        <input type="firstName" placeholder="Nome" onChange={handleSignUpName}/>
-                        <input type="surname" placeholder="Sobrenome" onChange={handleSignUpSurname}/>
-                        <input type="phone" placeholder="Telefone ou celular" onChange={handleSignUpPhone}/>
-                        <button onClick={handleSignUpBtn}>Me cadastrar!</button>
+                        <button onClick={handleSignUpBtn}>Solicitar nova conta!</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
@@ -218,9 +224,7 @@ const SignUpForm = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </>
-    );
+    )
 }
-
-export default SignUpForm

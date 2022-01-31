@@ -1,7 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import './Register/RegisterForm.css'
-import CardItem from "./CardItem";
-import BookItem from "./BookItem";
+
 import CategoryItem from "./CategoryItem";
 
 const axios = require('axios');
@@ -13,7 +12,7 @@ export default function CategoriesList() {
     useEffect(() => {
         axios.get('http://localhost:8081/api/v1/categories').then(({data}) => {
             console.log(data)
-            setCategories(data.data);
+            setCategories(data);
         })
         // eslint-disable-next-line
     }, [])

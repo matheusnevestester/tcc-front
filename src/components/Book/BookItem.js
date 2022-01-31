@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 function BookItem(props) {
+    const history = useHistory();
+
+
     return (
         <>
-            <li className='cards__item'>
+            <li className='cards__item'  onClick={() => history.push("/book", { book: props.bookingId })}>
                 <Link className='cards__item__link' to={props.path}>
                     <figure className='cards__item__pic-wrap' data-category={props.label}>
                         <img

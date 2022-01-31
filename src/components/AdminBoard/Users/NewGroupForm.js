@@ -1,13 +1,14 @@
 import React, {useRef, useState, useEffect} from "react";
-import './AdminForms.css'
-import '../Register/RegisterForm.css'
+import '../AdminForms.css'
+import '../../Register/RegisterForm.css'
 const axios = require('axios');
 
 const initialState = {
     groupName: '',
     groupDescription: '',
     groupStatus:'ACTIVE',
-    error: false,
+    newGroupSuccess: false,
+    newGroupFailure: false,
     sendNewGroup: false,
     articleId: null,
 }
@@ -33,18 +34,18 @@ const NewGroupForm = () => {
                 }
             }
             try {
-                const response = await axios.post('http://localhost:8083/api/v1/groups/', {
+                const response = await axios.post('http://localhost:8083/api/v1/groups', {
                     name: state.groupName,
                     description: state.groupDescription,
                     status: state.groupStatus
                 }, config)
                 console.log(response)
-                setState({...state, sendNewGroup: false})
+                setState({...state, sendNewGroup: false, newGroupSuccess: true})
             } catch (e) {
                 console.log(e);
-                setState({...state, error: true})
+                setState({...state, newGroupFailure: true})
                 setTimeout(() =>
-                        setState({...state, error: false, sendNewGroup: false}),
+                        setState({...state, newGroupFailure: false, sendNewGroup: false}),
                     2000)
             }
         }
@@ -57,6 +58,14 @@ const NewGroupForm = () => {
         <>
             <div className="admin-container center">
                 <form className="admin-form">
+                    {state.newGroupSuccess && <div className="alert-succes">
+                        <span className="alert-closebtn">&times;</span>
+                        Cadastro realizado com sucesso
+                    </div>}
+                    {state.newGroupFailure && <div className="alert">
+                        <span className="alert-closebtn">&times;</span>
+                        Oops parece que algo deu errado
+                    </div>}
                     <h1>Cadastrar novo grupo do livro!</h1>
                     <input onChange={handleChangeName} type="name" placeholder="Nome"/>
                     <input  onChange={handleChangeDescription} type="description" placeholder="Descrição do grupo"/>
